@@ -1,0 +1,14 @@
+	boolean launchSequenceChecker(String[] systemNames,  int[] stepNumbers) {
+		Map<String, Integer> map = new HashMap<>();
+		int len = systemNames.length;
+		for (int i = 0; i<len; i++) {
+			String name = systemNames[i];
+			int number = stepNumbers[i];
+			if(map.containsKey(name)){
+				int num = map.get(name);
+				if(num>=number) return false;
+			}
+			map.put(name,number);
+		}
+		return true;
+	}
