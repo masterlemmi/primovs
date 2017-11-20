@@ -1,5 +1,5 @@
-float halfN = (float)n/2;
-		System.out.println("HALF is " + halfN);
+String packetDescrambler(int[] seq, char[] fragmentData, int n) {
+		float halfN = (float)n/2;
 		Map<Integer, List<Character>> map = new HashMap<>();
 		for (int i = 0; i < seq.length; i++) {
 			int num = seq[i];
@@ -13,7 +13,6 @@ float halfN = (float)n/2;
 			}
 		}
 
-		System.out.println("MAP" + map);
 
 		if (map.size() == 1) {
 			if (!map.containsKey(0)) {
@@ -31,15 +30,12 @@ float halfN = (float)n/2;
 
 		}
 
-		System.out.println("MAP SIZE Is  " + map.size());
 		char[] answer = new char[map.size()];
 		for (int i = 0; i < map.size(); i++) {
 			List<Character> list = map.get(i);
 			if (list == null)
 				return "";
-			System.out.println("list for " + i + " is " + list);
 			Character maxChar = findMaxChar(list, halfN);
-			System.out.println(i + " " + maxChar);
 			if (maxChar == null)
 				return "";
 
@@ -69,12 +65,10 @@ float halfN = (float)n/2;
 				ch = c;
 			}
 		}
-		System.out.println("max freq is " + maxFreq + " with ch as " + ch);
 
 		if (maxFreq > halfN) {
 			return ch;
 		} else {
 			return null;
 		}
-
 	}
