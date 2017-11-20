@@ -1,4 +1,5 @@
-Map<Integer, List<Character>> map = new HashMap<>();
+
+		Map<Integer, List<Character>> map = new HashMap<>();
 		for (int i = 0; i < seq.length; i++) {
 			int num = seq[i];
 			char ch = fragmentData[i];
@@ -67,7 +68,8 @@ Map<Integer, List<Character>> map = new HashMap<>();
 			if (f >= maxFreq) {
 				if(f==.5 && maxFreq ==.5)
 					return null;
-				
+				if(f==.5 && set.size() ==1) 
+					return null;
 				maxFreq = f;
 				ch = c;
 			}
