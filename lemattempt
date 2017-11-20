@@ -1,4 +1,5 @@
-
+float halfN = (float)n/2;
+		System.out.println("HALF is " + halfN);
 		Map<Integer, List<Character>> map = new HashMap<>();
 		for (int i = 0; i < seq.length; i++) {
 			int num = seq[i];
@@ -13,7 +14,6 @@
 		}
 
 		System.out.println("MAP" + map);
-		
 
 		if (map.size() == 1) {
 			if (!map.containsKey(0)) {
@@ -21,7 +21,7 @@
 			}
 
 			List<Character> cList = map.get(0);
-			Character c = findMaxChar(cList,  n);
+			Character c = findMaxChar(cList, halfN);
 			if (c == null)
 				return "";
 			else if (c.equals('#'))
@@ -31,7 +31,6 @@
 
 		}
 
-		
 		System.out.println("MAP SIZE Is  " + map.size());
 		char[] answer = new char[map.size()];
 		for (int i = 0; i < map.size(); i++) {
@@ -39,7 +38,7 @@
 			if (list == null)
 				return "";
 			System.out.println("list for " + i + " is " + list);
-			Character maxChar = findMaxChar(list,  n);
+			Character maxChar = findMaxChar(list, halfN);
 			System.out.println(i + " " + maxChar);
 			if (maxChar == null)
 				return "";
@@ -58,102 +57,24 @@
 		return new String(answer);
 	}
 
-	static Character findMaxChar(List<Character> list, int n) {
-
+	static Character findMaxChar(List<Character> list, float halfN) {
+		
 		float maxFreq = 0;
 		Character ch = null;
 		Set<Character> set = new HashSet<>(list);
 		for (Character c : set) {
-			float f = Collections.frequency(list, c) / (float) n;
-			if (f >= maxFreq) {
-				if(f==.5 && maxFreq ==.5)
-					return null;
-				if(f==.5 && set.size() ==1) 
-					return null;
+			float f = Collections.frequency(list, c);
+			if (f > maxFreq) {
 				maxFreq = f;
 				ch = c;
 			}
 		}
 		System.out.println("max freq is " + maxFreq + " with ch as " + ch);
 
-		if (maxFreq >= .5) {
+		if (maxFreq > halfN) {
 			return ch;
 		} else {
 			return null;
 		}
 
 	}
-	
-	
-	
-	Input:
-seq: [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0]
-fragmentData: ["X", 
- "#", 
- "Y", 
- "x", 
- "#", 
- "Y", 
- "x", 
- "#", 
- "Y", 
- "x", 
- "#", 
- "Y", 
- "X", 
- "#", 
- "Y", 
- "W", 
- "#", 
- "Y"]
-n: 6
-Output:
-"Yx#"
-Expected Output:
-Empty
-Console Output:
-MAP{0=[Y, Y, Y, Y, Y, Y], 1=[X, x, x, x, X, W], 2=[#, #, #, #, #, #]}
-MAP SIZE Is  3
-list for 0 is [Y, Y, Y, Y, Y, Y]
-max freq is 1.0 with ch as Y
-0 Y
-list for 1 is [X, x, x, x, X, W]
-max freq is 0.5 with ch as x
-1 x
-list for 2 is [#, #, #, #, #, #]
-max freq is 1.0 with ch as #
-2 #
-Test 6
-Test 7
-Test 8
-Test 9
-Test 10
-Test 11
-Test 12
-Test 13
-Test 14
-Test 15
-Test 16
-Test 17
-Test 18
-Formatting
-Font Size
-14px
-Code Completion
-Auto-brackets
-Editor
-Type
-Sublime
-Theme
-Dark
-Hotkeys
-CTRL + Enter
-Submit Solution
-CTRL + R
-Run Solution
-CTRL + S
-Save Source Code
-RUN SAMPLE TESTS
-SUBMIT
-SKIP
-
