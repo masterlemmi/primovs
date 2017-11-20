@@ -1,0 +1,82 @@
+String packetDescrambler(int[] seq, char[] fragmentData, int n) {
+
+		Map<Integer, List<Character>> map = new HashMap<>();
+		for (int i = 0; i < seq.length; i++) {
+			int num = seq[i];
+			char ch = fragmentData[i];
+			if (map.containsKey(num)) {
+				map.get(num).add(ch);
+			} else {
+				List<Character> l = new ArrayList<>();
+				l.add(ch);
+				map.put(num, l);
+			}
+		}
+
+		System.out.println("MAP" + map);
+		int halfN = n % 2 == 0 ? n / 2 : n / 2 + 1;
+
+		if (map.size() == 1) {
+			if (!map.containsKey(0)) {
+				return "";
+			}
+
+			List<Character> cList = map.get(0);
+			Character c = findMaxChar(cList, halfN);
+			if (c == null)
+				return "";
+			else if (c.equals('#'))
+				return "#";
+			else
+				return "";
+
+		}
+
+		System.out.println("HALF is " + halfN);
+		System.out.println("MAP SIZE Is  " + map.size());
+		char[] answer = new char[map.size()];
+		for (int i = 0; i < map.size(); i++) {
+			List<Character> list = map.get(i);
+			if (list == null)
+				return "";
+			System.out.println("list for " + i + " is " + list);
+			Character maxChar = findMaxChar(list, halfN);
+			System.out.println(i + " " + maxChar);
+			if (maxChar == null)
+				return "";
+
+			if (i < map.size() - 1 && maxChar.equals('#')) {
+				return "";
+			}
+
+			if (i == map.size() - 1 && !maxChar.equals('#')) {
+				return "";
+			}
+
+			answer[i] = maxChar;
+		}
+
+		return new String(answer);
+	}
+
+	static Character findMaxChar(List<Character> list, int half) {
+
+		int maxFreq = 0;
+		Character ch = null;
+		Set<Character> set = new HashSet<>(list);
+		for (Character c : set) {
+			int f = Collections.frequency(list, c);
+			if (f > maxFreq) {
+				maxFreq = f;
+				ch = c;
+			}
+		}
+		System.out.println("max freq is " + maxFreq + " with ch as " + ch);
+
+		if (maxFreq >= half) {
+			return ch;
+		} else {
+			return null;
+		}
+
+	}
