@@ -1,29 +1,4 @@
-package spacex;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-public class PacketDescrambler {
-
-	public static void main(String[] args) {
-		int n = 3;
-		   int[] seq = { 1, 1, 2, 2, 2, 0, 0, 0 };
-		char[] frag = { '+', 
-				 '+', 
-				 'A', 
-				 'A', 
-				 'B', 
-				 '#', 
-				 '#', 
-				 '#'};
-		System.out.println("ANSWER is " + packetDescrambler(seq, frag, n));
-
-	}
 	String packetDescrambler(int[] seq, char[] fragmentData, int n) {
 		
 
@@ -103,4 +78,3 @@ public class PacketDescrambler {
 			return null;
 		}
 
-	}
